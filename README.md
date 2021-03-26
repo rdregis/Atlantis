@@ -21,3 +21,8 @@ A solicitar uma registro sua chave é pesquisada no cache de registro(1) e caso 
 Caso nao esteja no cache, a rotina procura o ponteiro do bloco que contem a chave, via binary search no vetor, e verifica se o bloco esta no cache de blocos(2). Se o bloco nao estiver no cache ele é lido do arquivo e salvo no cache(2).
 
 O proximo passo é localizar o registro da chave no bloco. Isto é feito por pesquisa binaria com a chave desejada. Ao encontrar é e inserido no cache de registro(1) e entregue ao solicitante. Se o registro nao existir um valor vazio é devolvido.
+
+Implementacoes adicionais
+- Cofiguracoes gravadas e lidas de arquivo
+- Log de informacoes de debug e statisticas
+- Warm up aleatorio de faixa de registor configurados 
