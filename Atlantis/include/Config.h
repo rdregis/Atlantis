@@ -3,6 +3,14 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
+//**************************************************************************************
+//*
+//*		Manager and configuration file storage 
+//*
+//*		2021/03/26
+//*		Rogerio Regis
+//*
+//*************************************************************************************
 
 #include <string>
 #include <sstream>
@@ -17,6 +25,11 @@
 
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		Interface IConfig
+//*
+//*************************************************************************************
 
 	class IConfig
 	{
@@ -29,6 +42,12 @@ namespace Atlantis
 }
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		template<typename KEY, typename VALUE>
+//*		class Config
+//*
+//*************************************************************************************
 	template<typename KEY, typename VALUE>
 	class Config
 		: public IConfig
@@ -134,6 +153,11 @@ namespace Atlantis
 
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		class ConfigCache (used as interface)
+//*
+//*************************************************************************************
 	
 	class ConfigCache
 		: public Config<std::string, std::string>

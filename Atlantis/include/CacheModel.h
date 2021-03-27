@@ -3,6 +3,14 @@
 #ifndef CACHEMODEL_H_
 #define CACHEMODEL_H_
 
+//**************************************************************************************
+//*
+//*		Implement RLU container
+//*
+//*		2021/03/26
+//*		Rogerio Regis
+//*
+//*************************************************************************************
 
 #include <string>
 #include <sstream>
@@ -19,6 +27,12 @@
 
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		template<typename CACHEKEY, typename CACHEVALUE>
+//*		Interface ICacheModel
+//*
+//*************************************************************************************
 	template<typename CACHEKEY, typename CACHEVALUE>
 	class ICacheModel
 	{
@@ -34,7 +48,12 @@ namespace Atlantis
 
 namespace Atlantis
 {
-	
+//**************************************************************************************
+//*
+//*		template<typename CACHEKEY, typename CACHEVALUE>
+//*		class CacheModelLRU
+//*
+//*************************************************************************************
 	template<typename CACHEKEY, typename CACHEVALUE>
 	class CacheModelLRU
 		: public ICacheModel<CACHEKEY, CACHEVALUE>
@@ -66,26 +85,6 @@ namespace Atlantis
 		const CacheModelLRU& operator=(const CacheModelLRU&) = delete;
 
 
-		//const CACHEVALUE& get(CACHEKEY key, const CACHEVALUE &valuei)
-		//{
-		//	CACHEVALUE value;
-		//	if (mChache_.find(key) != mChache_.end()) {  //found
-		//		value = mChache_[key]->second;
-		//		lCache_.erase(mChache_[key]);
-		//	}
-		//	else {
-		//		if (lCache_.size() == cacheSize_) {
-		//			PairCache pairlast = lCache_.back();
-		//			lCache_.pop_back();
-		//			mChache_.erase(key);
-		//		}
-		//	}
-
-		//	
-		//	lCache_.push_front(std::make_pair(key, valuei));
-		//	mChache_[key] = lCache_.begin();
-		//	return("");
-		//}
 
 		std::pair<bool, CACHEVALUE> getValue(CACHEKEY key) override
 		{
@@ -156,6 +155,12 @@ namespace Atlantis
 
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		template<typename CACHEKEY, typename CACHEVALUE>
+//*		class LRUCache
+//*
+//*************************************************************************************
 	
 	template <class CACHEKEY, class CACHEVALUE>
 	class LRUCache
@@ -251,7 +256,11 @@ namespace Atlantis
 //#define CACHEMODEL CacheModelLRU
 namespace Atlantis
 {
-
+//**************************************************************************************
+//*
+//*		class CacheRecord (used as interface)
+//*
+//*************************************************************************************
 	class CacheRecord
 		: public CacheModelLRU<int, std::string>
 	{

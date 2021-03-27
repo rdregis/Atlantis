@@ -2,6 +2,15 @@
 #ifndef MANAGERCACHEFILE_H_
 #define MANAGERCACHEFILE_H_
 
+//**************************************************************************************
+//*
+//*		Manager mecory cacho getting  record from file
+//*
+//*		2021/03/26
+//*		Rogerio Regis
+//*
+//*************************************************************************************
+
 #include <string>
 #include <sstream>
 #include <memory>
@@ -18,6 +27,11 @@
 
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		Interface IMgrCacheFile
+//*
+//*************************************************************************************
 	
 	class IMgrCacheFile
 	{
@@ -33,6 +47,11 @@ namespace Atlantis
 
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		class MgrCacheFile
+//*
+//*************************************************************************************
 	class MgrCacheFile
 		: IMgrCacheFile
 	{
@@ -274,7 +293,6 @@ namespace Atlantis
 		}
 
 
-
 		inline const std::string  getRecordValue(size_t key, size_t bufferPos, char *buffer, size_t bufferSize)
 		{
 
@@ -317,41 +335,6 @@ namespace Atlantis
 			return(atoi(skey.c_str()));
 		}
 
-		inline std::pair<size_t, size_t> getRecordKey1(char *buffer, size_t bufferSize, size_t posBuff, size_t sizeBuff)
-		{
-			sizeBuff = std::max<size_t>(sizeBuff, recordSize_ * 2);
-
-
-			size_t sizeBuffPos_D = std::max<size_t>(sizeBuff, recordSize_ * 2);;	// to down
-			size_t sizeBuffPos_U = bufferSize - posBuff;							// to upper
-
-			do {
-				if ((*buffer == '\n') ||	// look for end of line or start of block
-					(posBuff == 0)) {
-					std::string skey;
-					while (sizeBuffPos_D > 0 && sizeBuffPos_D > 0) {
-						--sizeBuffPos_D;
-						--sizeBuffPos_U;
-						if (*buffer != ' ') {		// delimite rfor key
-							skey.append(buffer, 1);
-							consistKeySize(skey);
-							++buffer;
-						}
-						else {
-							size_t offset = (sizeBuff - sizeBuffPos_D) - skey.size();
-							offset = posBuff == 0 ? offset : offset;		// increment because EOL
-							return(std::make_pair(atoi(skey.c_str()), offset));
-						}
-					}
-					return(std::make_pair(-1, 0));
-				}
-				++buffer;
-				--sizeBuffPos_D;
-				--sizeBuffPos_U;
-			} while (sizeBuffPos_D > 0 && sizeBuffPos_D > 0);
-
-			return(std::make_pair(-1, 0));
-		}
 
 		inline std::pair<size_t, size_t> getRecordKey(char *buffer, size_t bufferSize, size_t posBuff, size_t sizeBuff)
 		{
@@ -399,41 +382,6 @@ namespace Atlantis
 
 		}
 
-
-
-
-
-		inline std::pair<size_t, size_t> getRecordKeyO(char *buffer, size_t BuffeSize, size_t posBuff, size_t sizeBuff)
-		{
-			sizeBuff = std::max<size_t>(sizeBuff, recordSize_ * 2);
-			size_t sizeBuffPos = sizeBuff;
-
-			do {
-				if ((*buffer == '\n') ||	// look for end of line or start of block
-					(posBuff == 0)) {
-					std::string skey;
-					for (; sizeBuffPos > 0; --sizeBuffPos) {
-						if (*buffer != ' ') {		// delimite rfor key
-							skey.append(buffer, 1);
-							consistKeySize(skey);
-							++buffer;
-
-						}
-						else {
-							size_t offset = (sizeBuff - sizeBuffPos) - skey.size();
-							offset = posBuff == 0 ? offset : offset + 1;		// increment because EOL
-							return(std::make_pair(atoi(skey.c_str()), offset));
-						}
-					}
-					return(std::make_pair(-1, 0));
-				}
-				++buffer;
-				--sizeBuffPos;
-			} while (sizeBuffPos > 0);
-
-			return(std::make_pair(-1, 0));
-
-		}
 
 		inline size_t getFileIndex(size_t key)
 		{
