@@ -3,6 +3,16 @@
 #ifndef LOGGER_H_
 #define LOGGER_H_
 
+
+//**************************************************************************************
+//*
+//*		Implement simple logger file
+//*
+//*		2021/03/26
+//*		Rogerio Regis
+//*
+//*************************************************************************************
+
 #include <string>
 #include <memory>
 #include <fstream>
@@ -14,10 +24,13 @@
 
 
 
-
-
 namespace Atlantis
 {
+//**************************************************************************************
+//*
+//*		class Logger
+//*
+//*************************************************************************************
 	class Logger
 	{
 	public:
@@ -118,7 +131,7 @@ namespace Atlantis
 
 namespace Atlantis
 {
-	//std::thread::id m_threadId  = std::this_thread::get_id();
+
 #define  ALOG_WRITE(LOGTYPE, LOGMSG) \
 { \
     std::thread::id m_threadId = std::this_thread::get_id(); \
